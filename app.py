@@ -54,7 +54,7 @@ def app():
             st.subheader("Syllables:")
             for syllable in syllables:
                 st.write(syllables)  
-                st.write(syllables_list)    
+                # st.write(syllables_list)    
 
             # Display the MAWs
             st.subheader("Memory Anchor Words:")
