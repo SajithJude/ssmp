@@ -51,7 +51,7 @@ def app():
             maws = generate_maw(word_list)
 
             # Display the MAWs
-            st.write("Memory Anchor Words:")
+            st.subheader("Memory Anchor Words:")
             for maw in maws:
                 st.write(maw)
         else:
