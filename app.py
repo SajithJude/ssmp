@@ -51,8 +51,8 @@ def app():
         # Display syllables for the selected word when the "Show Syllables" button is clicked
         if st.button("Show Syllables"):
             syllables = divide_syllables(words_to_memorize)
-            st.subheader
-            st.info(f"Syllables ': {', '.join(syllables)}")
+            st.subheader("Syllables")
+            st.info(f"Syllables : {', '.join(syllables)}")
 
         # Generate MAWs for the input words
         maws = generate_maw(word_list)
