@@ -33,10 +33,10 @@ def generate_maw(wordes):
 
             if len(maw) >= 6 and len(maw) <= 20:
                 maws.append(maw)
-    return maws
+    return maws, syllables_list
    
 def app():
-    st.title("SMPL Memory Anchor Words Generator")
+    st.title("Memory Anchor Words Generator")
 
     # Text input for entering the words to memorize
     words_to_memorize = st.text_input("Enter the words to memorize, separated by commas")
@@ -47,15 +47,29 @@ def app():
             # Split the input words into a list
             word_list = [word.strip() for word in words_to_memorize.split(",")]
 
-            # Generate MAWs for the input words
-            maws = generate_maw(word_list)
+            # Generate MAWs and syllables for the input words
+            maws, syllables_list = generate_maw(word_list)
 
-            # # Display the MAWs
-            st.subheader("Memory Anchor Words:")
-            for maw in maws:
-                st.write(maw)
+            # Create a dropdown with the list of words
+            selected_word = st.selectbox("Select a word:", word_list)
+
+            # Find the index of the selected word in the word list
+            index = word_list.index(selected_word)
+
+            # Display the syllables for the selected word
+            st.write("Syllables:", syllables_list[index])
+
+            # Display the MAWs that contain the selected word
+            selected_word_maws = [maw for maw in maws if selected_word in maw]
+            st.write("Memory Anchor Words:")
+            if len(selected_word_maws) > 0:
+                for maw in selected_word_maws:
+                    st.write(maw)
+            else:
+                st.write("No Memory Anchor Words found for this word.")
         else:
             st.write("Please enter some words to memorize.")
+
 
 
 if __name__ == '__main__':
