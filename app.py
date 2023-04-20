@@ -27,16 +27,23 @@ def generate_maw(wordes):
     syllables_list = [divide_syllables(word) for word in word_list]
 
     maws = []
+    syllables = []
     for i in range(len(syllables_list)):
         for j in range(i+1, len(syllables_list)+1):
             maw = "".join([syllables_list[k][0] for k in range(i,j)])
 
             if len(maw) >= 6 and len(maw) <= 20:
                 maws.append(maw)
-    return maws, syllables_list
+        
+        # Add the list of syllables for the current word to the syllables list
+        syllables.append(syllables_list[i])
+    
+    # Return both the list of MAWs and the list of syllables
+    return maws, syllables
+
    
 def app():
-    st.title("SMPL Memory Anchor Words Generator")
+    st.title("Memory Anchor Words Generator")
 
     # Text input for entering the words to memorize
     words_to_memorize = st.text_input("Enter the words to memorize, separated by commas")
@@ -47,19 +54,15 @@ def app():
             # Split the input words into a list
             word_list = [word.strip() for word in words_to_memorize.split(",")]
 
-            # Generate MAWs for the input words
-            maws,syllables_list = generate_maw(word_list)
+            # Generate MAWs and syllables for the input words
+            maws, syllables_list = generate_maw(word_list)
 
-            syllables = divide_syllables(word_list)
-            st.subheader("Syllables:")
-            for syllable in syllables_list:
-                st.write(syllables)  
-                # st.write(syllables_list)    
-
-            # Display the MAWs
-            st.subheader("Memory Anchor Words:")
-            for maw in maws:
-                st.write(maw)
+            # Display the MAWs and syllables for each word
+            st.write("Memory Anchor Words and Syllables:")
+            for i in range(len(word_list)):
+                st.write(word_list[i])
+                st.write("Syllables:", syllables_list[i])
+                st.write("MAWs:", [maw for maw in maws if word_list[i] in maw])
         else:
             st.write("Please enter some words to memorize.")
 
