@@ -46,12 +46,13 @@ def app():
         word_list = [word.strip() for word in words_to_memorize.split(",")]
 
         # Dropdown to select a word
-        selected_word = st.selectbox("Select a word to display syllables:", word_list)
+        # selected_word = st.selectbox("Select a word to display syllables:", word_list)
 
         # Display syllables for the selected word when the "Show Syllables" button is clicked
         if st.button("Show Syllables"):
-            syllables = divide_syllables(selected_word)
-            st.write(f"Syllables for '{selected_word}': {', '.join(syllables)}")
+            syllables = divide_syllables(words_to_memorize)
+            st.subheader
+            st.info(f"Syllables ': {', '.join(syllables)}")
 
         # Generate MAWs for the input words
         maws = generate_maw(word_list)
