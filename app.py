@@ -21,8 +21,8 @@ def divide_syllables(word):
         syllables.append(current_syllable)
     return syllables
 
-def generate_maw(wordes):
-    sentence = " ".join(wordes)
+def generate_maw(words):
+    sentence = " ".join(words)
     word_list = word_tokenize(sentence)
     syllables_list = [divide_syllables(word) for word in word_list]
 
@@ -33,43 +33,35 @@ def generate_maw(wordes):
 
             if len(maw) >= 6 and len(maw) <= 20:
                 maws.append(maw)
-    return maws, syllables_list
-   
+    return maws
+
 def app():
-    st.title("Memory Anchor Words Generator")
+    st.title("SMPL Memory Anchor Words Generator")
 
     # Text input for entering the words to memorize
     words_to_memorize = st.text_input("Enter the words to memorize, separated by commas")
 
-    # Generate MAWs when the "Generate MAWs" button is clicked
-    if st.button("Generate MAWs"):
-        if words_to_memorize:
-            # Split the input words into a list
-            word_list = [word.strip() for word in words_to_memorize.split(",")]
+    # Split the input words into a list
+    if words_to_memorize:
+        word_list = [word.strip() for word in words_to_memorize.split(",")]
 
-            # Generate MAWs and syllables for the input words
-            maws, syllables_list = generate_maw(word_list)
+        # Dropdown to select a word
+        selected_word = st.selectbox("Select a word to display syllables:", word_list)
 
-            # Create a dropdown with the list of words
-            selected_word = st.selectbox("Select a word:", word_list)
+        # Display syllables for the selected word when the "Show Syllables" button is clicked
+        if st.button("Show Syllables"):
+            syllables = divide_syllables(selected_word)
+            st.write(f"Syllables for '{selected_word}': {', '.join(syllables)}")
 
-            # Find the index of the selected word in the word list
-            index = word_list.index(selected_word)
+        # Generate MAWs for the input words
+        maws = generate_maw(word_list)
 
-            # Display the syllables for the selected word
-            st.write("Syllables:", syllables_list[index])
-
-            # Display the MAWs that contain the selected word
-            selected_word_maws = [maw for maw in maws if selected_word in maw]
-            st.write("Memory Anchor Words:")
-            if len(selected_word_maws) > 0:
-                for maw in selected_word_maws:
-                    st.write(maw)
-            else:
-                st.write("No Memory Anchor Words found for this word.")
-        else:
-            st.write("Please enter some words to memorize.")
-
+        # Display the MAWs
+        st.subheader("Memory Anchor Words:")
+        for maw in maws:
+            st.write(maw)
+    else:
+        st.write("Please enter some words to memorize.")
 
 
 if __name__ == '__main__':
