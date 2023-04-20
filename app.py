@@ -39,7 +39,7 @@ def app():
     st.title("SMPL Memory Anchor Words Generator")
 
     # Text input for entering the words to memorize
-    words_to_memorize = st.text_input("Enter the words to memorize, separated by commas")
+    words_to_memorize = st.text_input("Enter the sentence you want to memorize")
 
     # Split the input words into a list
     if words_to_memorize:
