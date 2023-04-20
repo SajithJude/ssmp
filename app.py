@@ -50,7 +50,7 @@ def app():
             # Generate MAWs for the input words
             maws = generate_maw(word_list)
 
-
+            syllables = divide_syllables(word_list)
             st.subheader("Syllables:")
             for syllable in syllables:
                 st.write(syllables)  
