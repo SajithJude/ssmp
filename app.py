@@ -33,7 +33,7 @@ def generate_maw(wordes):
 
             if len(maw) >= 6 and len(maw) <= 20:
                 maws.append(maw)
-    return maws
+    return maws, syllables_list
    
 def app():
     st.title("SMPL Memory Anchor Words Generator")
@@ -48,11 +48,11 @@ def app():
             word_list = [word.strip() for word in words_to_memorize.split(",")]
 
             # Generate MAWs for the input words
-            maws = generate_maw(word_list)
+            maws,syllables_list = generate_maw(word_list)
 
             syllables = divide_syllables(word_list)
             st.subheader("Syllables:")
-            for syllable in syllables:
+            for syllable in syllables_list:
                 st.write(syllables)  
                 # st.write(syllables_list)    
 
