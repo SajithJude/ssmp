@@ -1,69 +1,27 @@
 import streamlit as st
-import nltk
-from nltk import word_tokenize
-from nltk.corpus import words
+import pyphen
 
-nltk.download('punkt')
-nltk.download('words')
+# Set language fallback and initialize Pyphen object
+pyphen.language_fallback('nl_NL_variant1')
+dic = pyphen.Pyphen(lang='nl_NL')
 
-def divide_syllables(word):
-    vowels = "AEIOUYaeiouy"
-    syllables = []
-    current_syllable = ""
-    for letter in word:
-        if letter in vowels:
-            if current_syllable:
-                syllables.append(current_syllable)
-            current_syllable = letter
-        else:
-            current_syllable += letter
-    if current_syllable:
-        syllables.append(current_syllable)
-    return syllables
-
-def generate_maw(words):
-    sentence = " ".join(words)
-    word_list = word_tokenize(sentence)
-    syllables_list = [divide_syllables(word) for word in word_list]
-
-    maws = []
-    for i in range(len(syllables_list)):
-        for j in range(i+1, len(syllables_list)+1):
-            maw = "".join([syllables_list[k][0] for k in range(i,j)])
-
-            if len(maw) >= 6 and len(maw) <= 20:
-                maws.append(maw)
-    return maws
-
+# Define Streamlit app
 def app():
-    st.title("SMPL Memory Anchor Words Generator")
+    # Add a title
+    st.title("syllables gnenerator")
 
-    # Text input for entering the words to memorize
-    words_to_memorize = st.text_input("Enter the sentence you want to memorize")
+    # Add a text input field for the user to enter a word
+    word = st.text_input("Enter a word:", "")
 
-    # Split the input words into a list
-    if words_to_memorize:
-        word_list = [word.strip() for word in words_to_memorize.split(",")]
+    # Check if the user has entered a word
+    if word:
+        # Get the hyphenation pairs for the entered word
+        hyphenated_word = dic.inserted(word)
 
-        # Dropdown to select a word
-        # selected_word = st.selectbox("Select a word to display syllables:", word_list)
+        # Display the hyphenation pairs
+        st.write("Hyphenation for the word **{}**:".format(word))
+        st.write(hyphenated_word)
 
-        # Display syllables for the selected word when the "Show Syllables" button is clicked
-        if st.button("Show Syllables"):
-            syllables = divide_syllables(words_to_memorize)
-            st.subheader("Syllables")
-            st.info(f"Syllables : {', '.join(syllables)}")
-
-        # Generate MAWs for the input words
-        maws = generate_maw(word_list)
-
-        # Display the MAWs
-        st.subheader("Memory Anchor Words:")
-        for maw in maws:
-            st.write(maw)
-    else:
-        st.write("Please enter some words to memorize.")
-
-
+# Run the Streamlit app
 if __name__ == '__main__':
     app()
