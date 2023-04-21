@@ -22,16 +22,14 @@ def syllable_combinations(word):
     return syllist
 
 # Function to generate MAWs
-# Function to generate MAWs
 def generate_maws(words):
     syllable_combinations_list = [
-        [syllable[:5] for syllable in syllable_combinations(word)]
+        [syllable[:3] for syllable in syllable_combinations(word)]
         for word in words
     ]
     maw_combinations = list(itertools.product(*syllable_combinations_list))
     maws = list(set([''.join(maw) for maw in maw_combinations]))  # Remove duplicates by converting to set and back to list
     return maws
-
 
 # Define Streamlit app
 def app():
@@ -45,6 +43,14 @@ def app():
     if sentence:
         words = sentence.split()
         filtered_words = [word for word in words if word.lower() not in stop_words]
+        
+        # Display syllable variations for each word
+        st.write("Syllable variations:")
+        for word in filtered_words:
+            syllables = syllable_combinations(word)
+            st.write(f"{word}: {', '.join(syllables)}")
+
+        # Generate and display MAWs
         maws = generate_maws(filtered_words)
         st.write("Suggested Memory Anchor Words:")
         for maw in maws:
