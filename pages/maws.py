@@ -45,16 +45,16 @@ def app():
         filtered_words = [word for word in words if word.lower() not in stop_words]
         
         # Display syllable variations for each word
-        st.write("Syllable variations:")
+        st.subheader("Syllable variations:")
         for word in filtered_words:
             syllables = syllable_combinations(word)
-            st.write(f"{word}: {', '.join(syllables)}")
+            st.info(f"{word}: {', '.join(syllables)}")
 
         # Generate and display MAWs
         maws = generate_maws(filtered_words)
         st.write("Suggested Memory Anchor Words:")
         for maw in maws:
-            st.info(maw)
+            st.success(maw)
 
 # Run the Streamlit app
 if __name__ == '__main__':
