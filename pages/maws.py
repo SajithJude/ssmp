@@ -36,6 +36,8 @@ def app():
     # Add a title
     st.title("Memory Anchor Words (MAWs) Generator")
 
+    col1,col2 = st.columns(2)
+
     # Add a text input field for the user to enter a sentence
     sentence = st.text_input("Enter a sentence:", "")
 
@@ -45,16 +47,16 @@ def app():
         filtered_words = [word for word in words if word.lower() not in stop_words]
         
         # Display syllable variations for each word
-        st.subheader("Syllable variations:")
+        col1.subheader("Syllable variations:")
         for word in filtered_words:
             syllables = syllable_combinations(word)
-            st.info(f"{word}  : {', '.join(syllables)}")
+            col1.info(f"{word}  : {', '.join(syllables)}")
 
         # Generate and display MAWs
         maws = generate_maws(filtered_words)
-        st.subheader("Suggested Memory Anchor Words:")
+        col2.subheader("Suggested Memory Anchor Words:")
         for maw in maws:
-            st.success(maw)
+            col2.success(maw)
 
 # Run the Streamlit app
 if __name__ == '__main__':
