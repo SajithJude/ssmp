@@ -16,7 +16,7 @@ def app():
     # Check if the user has entered a word
     if word:
         # Get the hyphenation pairs for the entered word
-        hyphenated_word = list(dic.iterate(word))
+        hyphenated_word = dic.iterate(word)
         hyp  = dic.inserted(word)
         # Display the hyphenation variations
         # st.info("Syllable variations for the word **{}**:".format(word))
