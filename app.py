@@ -21,7 +21,7 @@ def app():
         # Display the hyphenation variations
         # st.info("Syllable variations for the word **{}**:".format(word))
         for variation in hyphenated_word:
-            st.info(variation, hyp)
+            st.write(variation, hyp)
 
 # Run the Streamlit app
 if __name__ == '__main__':
