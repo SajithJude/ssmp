@@ -48,11 +48,11 @@ def app():
         st.subheader("Syllable variations:")
         for word in filtered_words:
             syllables = syllable_combinations(word)
-            st.info(f"{word}: {', '.join(syllables)}")
+            st.info(f"{word}  : {', '.join(syllables)}")
 
         # Generate and display MAWs
         maws = generate_maws(filtered_words)
-        st.write("Suggested Memory Anchor Words:")
+        st.subheader("Suggested Memory Anchor Words:")
         for maw in maws:
             st.success(maw)
 
