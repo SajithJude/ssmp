@@ -1,6 +1,12 @@
 import itertools
 import streamlit as st
 import pyphen
+import nltk
+from nltk.corpus import stopwords
+
+# Download stopwords
+nltk.download('stopwords')
+stop_words = set(stopwords.words('english'))
 
 # Initialize Pyphen object
 dic = pyphen.Pyphen(lang='en_US')
@@ -33,7 +39,8 @@ def app():
     # Check if the user has entered a sentence
     if sentence:
         words = sentence.split()
-        maws = generate_maws(words)
+        filtered_words = [word for word in words if word.lower() not in stop_words]
+        maws = generate_maws(filtered_words)
         st.write("Suggested Memory Anchor Words:")
         for maw in maws:
             st.info(maw)
