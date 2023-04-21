@@ -24,7 +24,7 @@ def syllable_combinations(word):
 # Function to generate MAWs
 def generate_maws(words):
     syllable_combinations_list = [
-        [syllable for syllable in syllable_combinations(word) if len(syllable) <= 3]
+        [syllable for syllable in syllable_combinations(word) if len(syllable) <= 6]
         for word in words
     ]
     maw_combinations = list(itertools.product(*syllable_combinations_list))
