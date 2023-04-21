@@ -3,7 +3,7 @@ import pyphen
 
 # Set language fallback and initialize Pyphen object
 # pyphen.language_fallback('nl_NL_variant1')
-dic = pyphen.Pyphen(lang='en')
+dic = pyphen.Pyphen(lang='en_US')
 
 # Define Streamlit app
 def app():
