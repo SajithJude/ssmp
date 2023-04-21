@@ -16,11 +16,12 @@ def app():
     # Check if the user has entered a word
     if word:
         # Get the hyphenation pairs for the entered word
-        hyphenated_word = dic.inserted(word)
+        hyphenated_word = list(dic.iterate(word))
 
-        # Display the hyphenation pairs
-        st.write("Hyphenation for the word **{}**:".format(word))
-        st.write(hyphenated_word)
+        # Display the hyphenation variations
+        st.info("Syllable variations for the word **{}**:".format(word))
+        for variation in hyphenated_word:
+            st.write(variation)
 
 # Run the Streamlit app
 if __name__ == '__main__':
