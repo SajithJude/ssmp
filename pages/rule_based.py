@@ -12,20 +12,23 @@ def app():
 
     # Add a text input field for the user to enter a word
     word = st.text_input("Enter a word:", "")
-
+    syllist = []
     # Check if the user has entered a word
     if word:
         # Get the hyphenation pairs for the entered word
         hyphenated_word = dic.iterate(word)
         hyp  = dic.inserted(word)
+        syllist.append(hyp)
         # Display the hyphenation variations
         # st.info("Syllable variations for the word **{}**:".format(word))
         st.info(hyp)
         for variation in hyphenated_word:
             vary = "-".join(variation)
             st.info(str(vary))
-            # st.write(type(variation))
+            syllist.append(str(vary))
 
+            # st.write(type(variation))
+    st.write(syllist)
 # Run the Streamlit app
 if __name__ == '__main__':
     app()
