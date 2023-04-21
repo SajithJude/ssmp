@@ -8,7 +8,7 @@ dic = pyphen.Pyphen(lang='nl_NL')
 # Define Streamlit app
 def app():
     # Add a title
-    st.title("syllables gnenerator")
+    st.title("syllables")
 
     # Add a text input field for the user to enter a word
     word = st.text_input("Enter a word:", "")
