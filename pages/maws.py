@@ -36,10 +36,11 @@ def app():
     # Add a title
     st.title("Memory Anchor Words (MAWs) Generator")
 
-    col1,col2 = st.columns(2)
+    
 
     # Add a text input field for the user to enter a sentence
     sentence = st.text_input("Enter a sentence:", "")
+    col1,col2 = st.columns(2)
 
     # Check if the user has entered a sentence
     if sentence:
@@ -54,7 +55,7 @@ def app():
 
         # Generate and display MAWs
         maws = generate_maws(filtered_words)
-        col2.subheader("Suggested Memory Anchor Words:")
+        col2.subheader("Memory Anchor Words:")
         for maw in maws:
             col2.success(maw)
 
