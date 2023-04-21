@@ -20,8 +20,9 @@ def app():
         hyp  = dic.inserted(word)
         # Display the hyphenation variations
         # st.info("Syllable variations for the word **{}**:".format(word))
+        st.write(hyp)
         for variation in hyphenated_word:
-            st.write(variation, hyp)
+            st.write(variation)
 
 # Run the Streamlit app
 if __name__ == '__main__':
