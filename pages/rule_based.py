@@ -23,6 +23,7 @@ def app():
         st.write(hyp)
         for variation in hyphenated_word:
             st.write(variation)
+            st.write(type(variation))
 
 # Run the Streamlit app
 if __name__ == '__main__':
