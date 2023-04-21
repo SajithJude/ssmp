@@ -23,10 +23,13 @@ def syllable_combinations(word):
 
 # Function to generate MAWs
 def generate_maws(words):
-    syllable_combinations_list = [syllable_combinations(word) for word in words]
+    syllable_combinations_list = [
+        [syllable[:3] for syllable in syllable_combinations(word)]
+        for word in words
+    ]
     maw_combinations = list(itertools.product(*syllable_combinations_list))
     maws = [''.join(maw) for maw in maw_combinations]
-    return maws
+    return maws[:5]
 
 # Define Streamlit app
 def app():
