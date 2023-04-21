@@ -29,7 +29,7 @@ def generate_maws(words):
     ]
     maw_combinations = list(itertools.product(*syllable_combinations_list))
     maws = [''.join(maw) for maw in maw_combinations]
-    return maws[:5]
+    return maws
 
 # Define Streamlit app
 def app():
