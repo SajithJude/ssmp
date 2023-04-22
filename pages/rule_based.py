@@ -19,9 +19,8 @@ def app():
         hyphenated_word = dic.iterate(word)
         hyp  = dic.inserted(word)
         syllist.append(hyp)
-        # Display the hyphenation variations
-        # st.info("Syllable variations for the word **{}**:".format(word))
         st.info(hyp)
+        st.success(dic.positions(word))
        
 
 # Run the Streamlit app
