@@ -21,6 +21,8 @@ def app():
         syllist.append(hyp)
         st.info(hyp)
         st.success(dic.positions(word))
+        st.success(dic.wrap(word,11))
+
        
 
 # Run the Streamlit app
