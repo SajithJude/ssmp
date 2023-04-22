@@ -18,6 +18,12 @@ def app():
     if word:
         # Get the hyphenation pairs for the entered word
         hyphenated_word = dic.iterate(word)
+        syllables = hyphenated_word.split('-')
+        
+        st.info("Syllables for the word **{}**:".format(word))
+        for index, syllable in enumerate(syllables, 1):
+            st.write(f"{index}. {syllable}")
+
         hyp  = dic.inserted(word)
         syllist.append(hyp)
         st.info(hyp)
