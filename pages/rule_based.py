@@ -14,7 +14,7 @@ def app():
     word = st.text_input("Enter a word:", "")
     syllist = []
     # Check if the user has entered a word
-    num= st.number_input("width")
+    num= st.number_input("width",step=1)
     if word:
         # Get the hyphenation pairs for the entered word
         hyphenated_word = dic.iterate(word)
