@@ -58,6 +58,7 @@ def app():
     
     if word:
         syllables = split_syllables(word)
+        st.success(syllables)
         
         if syllables:
             st.info(f"Syllables for the word **{word}**:")
