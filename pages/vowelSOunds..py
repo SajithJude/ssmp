@@ -44,7 +44,7 @@ def split_syllables(word):
             current_syllable = []
 
     if current_syllable:
-        syllables[-1] += current_syllable
+        syllables[1] += current_syllable
 
     return phonemes_to_letters(syllables, word)
 
