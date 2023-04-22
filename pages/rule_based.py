@@ -32,13 +32,13 @@ def app():
         hyphenated_word = dic.inserted(word)
         
         if not dic.positions(word):
-            st.info("Default hyphenation not found. Generating alternative syllable splits:")
+            # st.info("Default hyphenation not found. Generating alternative syllable splits:")
             syllable_splits = split_syllables(word)
             for split in syllable_splits:
-                st.write(split)
+                st.info(split)
         else:
-            st.info(f"Default hyphenation for the word **{word}**:")
-            st.write(hyphenated_word)
+            # st.info(f"Default hyphenation for the word **{word}**:")
+            st.info(hyphenated_word)
 
 if __name__ == '__main__':
     app()
