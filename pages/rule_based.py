@@ -11,12 +11,17 @@ def split_syllables(word):
 
     while i < len(word) - 1:
         if word[i] in vowels and word[i+1] not in vowels:
-            splits.append(word[:i+1] + '-' + word[i+1:])
+            split = word[:i+1] + '-' + word[i+1:]
+            if len(split.split('-')[0]) > 2:
+                splits.append(split)
         if word[i] not in vowels and word[i+1] in vowels:
-            splits.append(word[:i+1] + '-' + word[i+1:])
+            split = word[:i+1] + '-' + word[i+1:]
+            if len(split.split('-')[0]) > 2:
+                splits.append(split)
         i += 1
 
     return list(set(splits))
+
 
 def app():
     st.title("Rule-based Syllables Generator")
