@@ -12,11 +12,11 @@ def split_syllables(word):
     while i < len(word) - 1:
         if word[i] in vowels and word[i+1] not in vowels:
             split = word[:i] + '-' + word[i+1:]
-            if len(split.split('-')[0]) > 2 and len(split.split('-')[1]) > 3:
+            if len(split.split('-')[0]) > 2:
                 splits.append(split)
         if word[i] not in vowels and word[i+1] in vowels:
             split = word[:i+1] + '-' + word[i+2:]
-            if len(split.split('-')[0]) > 2 and len(split.split('-')[1]) > 3:
+            if len(split.split('-')[0]) > 2:
                 splits.append(split)
         i += 1
 
