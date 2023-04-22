@@ -11,16 +11,10 @@ def is_vowel_sound(phoneme):
 
 def phoneme_to_text(phoneme, word, start_idx):
     phoneme = phoneme.lower()
-    found = False
     for i in range(start_idx, len(word)):
         if word[i] == phoneme[0]:
-            found = True
-            phoneme = phoneme[1:]
-            if not phoneme:
-                break
-        elif found:
-            break
-    return word[start_idx:i+1], i+1
+            return word[start_idx:i] + word[i], i + 1
+    return word[start_idx:], len(word)
 
 def phonemes_to_letters(syllables, word):
     idx = 0
@@ -50,10 +44,9 @@ def split_syllables(word):
             current_syllable = []
 
     if current_syllable:
-        syllables[-1] += current_syllable
+        syllables[1] += current_syllable
 
     return phonemes_to_letters(syllables, word)
-
 
 
 
