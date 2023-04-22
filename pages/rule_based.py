@@ -27,7 +27,7 @@ def app():
         hyp  = dic.inserted(word)
         syllist.append(hyp)
         st.info(hyp)
-        st.success(dic.positions(word))
+        # st.success(dic.positions(word))
         st.success(dic.wrap(word,num,hyphen='-'))
 
        
