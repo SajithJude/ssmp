@@ -9,16 +9,24 @@ cmu_dict = cmudict.dict()
 def is_vowel_sound(phoneme):
     return any(char.isdigit() for char in phoneme)
 
-def phonemes_to_letters(syllables):
-    letters = ''
+def phonemes_to_letters(syllables, word):
+    word = word.lower()
+    word_idx = 0
+    letter_syllables = []
+
     for syllable in syllables:
+        letter_syllable = ''
         for phoneme in syllable:
-            if phoneme[-1].isdigit():
-                letters += phoneme[:-1].lower()
-            else:
-                letters += phoneme.lower()
-        letters += '-'
-    return letters[:-1]
+            phoneme_letters = phoneme.lower()
+            while word_idx < len(word) and phoneme_letters:
+                current_letter = word[word_idx]
+                if current_letter == phoneme_letters[0]:
+                    letter_syllable += current_letter
+                    phoneme_letters = phoneme_letters[1:]
+                word_idx += 1
+        letter_syllables.append(letter_syllable)
+
+    return '-'.join(letter_syllables)
 
 def split_syllables(word):
     word = word.lower()
@@ -38,7 +46,8 @@ def split_syllables(word):
     if current_syllable:
         syllables[-1] += current_syllable
 
-    return phonemes_to_letters(syllables)
+    return phonemes_to_letters(syllables, word)
+
 
 
 def app():
