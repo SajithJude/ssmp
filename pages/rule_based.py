@@ -38,7 +38,7 @@ def app():
                 st.info(split)
         else:
             # st.info(f"Default hyphenation for the word **{word}**:")
-            st.info(hyphenated_word)
+            st.success(hyphenated_word)
 
 if __name__ == '__main__':
     app()
