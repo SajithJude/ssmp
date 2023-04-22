@@ -17,7 +17,7 @@ def app():
     num= st.number_input("width",step=1)
     if word:
         # Get the hyphenation pairs for the entered word
-        hyphenated_word = dic.iterate(word)
+        hyphenated_word = dic.inserted(word)
         syllables = hyphenated_word.split('-')
         
         st.info("Syllables for the word **{}**:".format(word))
