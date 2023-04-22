@@ -1,37 +1,48 @@
 import streamlit as st
 import pyphen
 
-# Set language fallback and initialize Pyphen object
-# pyphen.language_fallback('nl_NL_variant1')
 dic = pyphen.Pyphen(lang='en_US')
 
-# Define Streamlit app
+def split_syllables(word):
+    vowels = 'aeiouy'
+    splits = []
+    word = word.lower()
+    i = 0
+
+    while i < len(word) - 1:
+        if word[i] in vowels and word[i+1] not in vowels:
+            splits.append(word[:i+1] + '-' + word[i+1:])
+        if word[i] not in vowels and word[i+1] in vowels:
+            splits.append(word[:i+1] + '-' + word[i+1:])
+        i += 1
+
+    return list(set(splits))
+
 def app():
-    # Add a title
-    st.title("Rule based Syllables generator")
+    st.title("Rule-based Syllables Generator")
 
-    # Add a text input field for the user to enter a word
     word = st.text_input("Enter a word:", "")
-    syllist = []
-    # Check if the user has entered a word
-    num= st.number_input("width",step=1)
+    
     if word:
-        # Get the hyphenation pairs for the entered word
         hyphenated_word = dic.inserted(word)
-        syllables = hyphenated_word.split('-')
         
-        st.info("Syllables for the word **{}**:".format(word))
-        for index, syllable in enumerate(syllables, 1):
-            st.write(f"{index}. {syllable}")
+        if not dic.positions(word):
+            st.info("Default hyphenation not found. Generating alternative syllable splits:")
+            syllable_splits = split_syllables(word)
+            for split in syllable_splits:
+                st.write(split)
+        else:
+            st.info(f"Default hyphenation for the word **{word}**:")
+            st.write(hyphenated_word)
 
-        hyp  = dic.inserted(word)
-        syllist.append(hyp)
-        st.info(hyp)
-        # st.success(dic.positions(word))
-        st.success(dic.wrap(word,num,hyphen='-'))
-
-       
-
-# Run the Streamlit app
 if __name__ == '__main__':
     app()
+
+
+
+#     syllables = hyphenated_word.split('-')
+        
+#         st.info("Syllables for the word **{}**:".format(word))
+#         for index, syllable in enumerate(syllables, 1):
+#             st.write(f"{index}. {syllable}")
+# # 
