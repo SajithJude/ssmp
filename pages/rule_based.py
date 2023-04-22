@@ -24,7 +24,7 @@ def split_syllables(word):
 
 
 def app():
-    st.title("Rule-based Syllables Generator")
+    st.title("Syllables")
 
     word = st.text_input("Enter a word:", "")
     
